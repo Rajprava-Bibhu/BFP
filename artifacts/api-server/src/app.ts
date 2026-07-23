@@ -58,7 +58,7 @@ if (process.env.NODE_ENV === "production") {
   );
 
   // SPA catch-all — serve index.html for any non-API route
-  app.get("*", (_req: Request, res: Response) => {
+  app.get("/*splat", (_req: Request, res: Response) => {
     res.sendFile(path.join(publicDir, "index.html"), {
       headers: {
         "Cache-Control": "no-cache, no-store, must-revalidate",
