@@ -1,0 +1,81 @@
+{
+  "family": "bizauto-api",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn":      "arn:aws:iam::ACCOUNT_ID:role/bizauto-task-role",
+  "containerDefinitions": [
+    {
+      "name": "bizauto-api",
+      "image": "ACCOUNT_ID.dkr.ecr.REGION.amazonaws.com/bizauto-api:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "NODE_ENV", "value": "production" },
+        { "name": "PORT",     "value": "8080"       },
+        { "name": "AWS_REGION",       "value": "REGION"              },
+        { "name": "S3_BUCKET_REGION", "value": "REGION"              }
+      ],
+      "secrets": [
+        {
+          "name": "DATABASE_URL",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/DATABASE_URL"
+        },
+        {
+          "name": "JWT_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/JWT_SECRET"
+        },
+        {
+          "name": "REFRESH_SECRET",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/REFRESH_SECRET"
+        },
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/AWS_ACCESS_KEY_ID"
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/AWS_SECRET_ACCESS_KEY"
+        },
+        {
+          "name": "S3_BUCKET_NAME",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/S3_BUCKET_NAME"
+        },
+        {
+          "name": "CORS_ORIGIN",
+          "valueFrom": "arn:aws:secretsmanager:REGION:ACCOUNT_ID:secret:bizauto/prod/CORS_ORIGIN"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group":         "/ecs/bizauto-api",
+          "awslogs-region":        "REGION",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group":  "true"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD", "node", "-e",
+          "require('http').get('http://localhost:8080/api/health', r => process.exit(r.statusCode===200?0:1))"
+        ],
+        "interval":    30,
+        "timeout":     5,
+        "retries":     3,
+        "startPeriod": 60
+      },
+      "ulimits": [
+        { "name": "nofile", "softLimit": 65536, "hardLimit": 65536 }
+      ]
+    }
+  ]
+}

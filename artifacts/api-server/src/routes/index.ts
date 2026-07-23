@@ -1,0 +1,46 @@
+import { Router, type IRouter } from "express";
+import healthRouter from "./health.js";
+import authRouter from "./auth.js";
+import tenantsRouter from "./tenants.js";
+import usersRouter from "./users.js";
+import departmentsRouter from "./departments.js";
+import attendanceRouter from "./attendance.js";
+import projectsRouter from "./projects.js";
+import billingRouter from "./billing.js";
+import marketingRouter from "./marketing.js";
+import analyticsRouter from "./analytics.js";
+import clientsRouter from "./clients.js";
+import billsRouter from "./bills.js";
+import calendarRouter from "./calendar.js";
+import financeRouter from "./finance.js";
+import inventoryRouter from "./inventory.js";
+import documentsRouter from "./documents.js";
+import digitalMarketingRouter from "./digitalMarketing.js";
+import auditLogRouter from "./auditLog.js";
+import reconciliationRouter from "./reconciliation.js";
+import reportsRouter from "./reports.js";
+
+const router: IRouter = Router();
+
+router.use(healthRouter);
+router.use("/auth", authRouter);
+router.use("/tenants", tenantsRouter);
+router.use("/users", usersRouter);
+router.use("/departments", departmentsRouter);
+router.use("/attendance", attendanceRouter);
+router.use("/projects", projectsRouter);
+router.use("/billing", billingRouter);
+router.use("/marketing", marketingRouter);
+router.use("/analytics", analyticsRouter);
+router.use("/clients", clientsRouter);
+router.use("/bills", billsRouter);
+router.use("/calendar", calendarRouter);
+router.use("/finance", financeRouter);
+router.use("/inventory", inventoryRouter);
+router.use("/documents", documentsRouter);
+router.use("/digital-marketing", digitalMarketingRouter);
+router.use("/audit", auditLogRouter);
+router.use("/reconciliation", reconciliationRouter);
+router.use("/reports", reportsRouter);
+
+export default router;
