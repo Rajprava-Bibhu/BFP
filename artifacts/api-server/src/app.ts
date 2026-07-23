@@ -3,7 +3,6 @@ import { fileURLToPath } from "url";
 import express, { type Express, type Request, type Response } from "express";
 import cors from "cors";
 import router from "./routes";
-<<<<<<< HEAD
 import path from 'path';
 
 
@@ -14,11 +13,6 @@ const __filename = typeof import.meta !== 'undefined' && import.meta.url
   ? fileURLToPath(import.meta.url) 
   : '';
 const __dirname = __filename ? path.dirname(__filename) : process.cwd();
-=======
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
->>>>>>> e063c9f89f21e1028c9350866a8a25e9d0e42707
 
 const app: Express = express();
 
