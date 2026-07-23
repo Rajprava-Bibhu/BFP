@@ -1,5 +1,9 @@
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
-const API_BASE = `${BASE}/api`;
+//const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+const BACKEND_URL = import.meta.env.VITE_API_BASE_URL || "https://bfp-backend-reye.onrender.com";
+const API_BASE = `${BACKEND_URL.replace(/\/$/, "")}/api`;
+//const API_BASE = `${BASE}/api`;
+
+console.log("API_BASE:", API_BASE);
 
 function getToken(): string | null {
   return localStorage.getItem("token");

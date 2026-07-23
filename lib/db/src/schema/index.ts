@@ -15,3 +15,6 @@ export * from "./inventory";
 export * from "./documents";
 export * from "./digitalMarketing";
 export * from "./reconciliation";
+
+// Resolve duplicate exports shared by marketing and digitalMarketing.
+export { campaignStatusEnum, campaignTypeEnum } from "./marketing";
