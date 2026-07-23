@@ -3,8 +3,6 @@ import { fileURLToPath } from "url";
 import express, { type Express, type Request, type Response } from "express";
 import cors from "cors";
 import router from "./routes";
-import path from 'path';
-
 
 //const __filename = fileURLToPath(import.meta.url);
 //const __dirname  = path.dirname(__filename);
