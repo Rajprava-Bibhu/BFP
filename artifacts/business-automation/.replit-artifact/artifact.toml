@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Business Automation"
+version = "1.0.0"
+id = "artifacts/business-automation"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 23832
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/business-automation run dev"
+
+[services.env]
+PORT = "23832"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/business-automation", "run", "build"]
+publicDir = "artifacts/business-automation/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

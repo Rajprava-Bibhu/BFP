@@ -1,0 +1,42 @@
+# ── Build outputs ─────────────────────────────────────────────
+dist/
+tmp/
+out-tsc/
+*.tsbuildinfo
+.expo/
+.expo-shared/
+
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+
+# ── Environment secrets ───────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── OS / Editor ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+/.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ── Misc ──────────────────────────────────────────────────────
+/coverage
+/typings
+
+# ── Replit (not needed outside Replit) ───────────────────────
+.cache/
+.local/
+.replit
+.replitignore
+attached_assets/
