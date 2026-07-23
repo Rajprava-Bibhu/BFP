@@ -21,7 +21,7 @@ const allowlist = [
   "date-fns",
   "drizzle-orm",
   "drizzle-zod",
-  "express",
+ // "express",
   "express-rate-limit",
   "express-session",
   "jsonwebtoken",
